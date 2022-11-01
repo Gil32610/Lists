@@ -13,4 +13,23 @@ public class CircularDoublyLinkedList<T extends Comparable<T>> {
             return false;
         }
     }
+
+    public void insertFirst(T content){
+        DoublyLinkedNode<T> aNode = new DoublyLinkedNode<T>(content);
+        if(this.isEmpty()){
+            this.head = aNode;
+            this.tail = aNode;
+            this.tail.setNext(this.head);
+            this.head.setPrevious(this.tail);
+            this.quantity++;
+        }
+        else{
+            aNode.setNext(this.head);
+            this.head.setPrevious(aNode);
+            this.head = aNode;
+            this.tail.setNext(this.head);
+            this.head.setPrevious(this.tail);
+            this.quantity++;
+        }
+    }
 }
