@@ -49,4 +49,14 @@ public class CircularDoublyLinkedList<T extends Comparable<T>> {
             this.quantity++;
         }
     }
+
+    public void showAll(){
+        int i = 0;
+        DoublyLinkedNode<T> current = this.head;
+        while(i!= this.quantity){
+            System.out.println(current.getContent());
+            current = current.getNext();
+            i++;
+        }
+    }
 }
