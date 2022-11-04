@@ -92,4 +92,19 @@ public class CircularDoublyLinkedList<T extends Comparable<T>> {
             this.quantity--;
         }
     }
+
+    public void removeLast() {
+        if (this.isEmpty()) {
+            System.out.println("Empty list");
+        } else if (this.head.getNext() == this.head) {
+            this.head = null;
+            this.tail = null;
+            this.quantity = 0;
+        } else {
+            this.tail = this.tail.getPrevious();
+            this.tail.setNext(this.head);
+            this.head.setPrevious(this.tail);
+            this.quantity--;
+        }
+    }
 }
