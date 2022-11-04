@@ -50,13 +50,31 @@ public class CircularDoublyLinkedList<T extends Comparable<T>> {
         }
     }
 
-    public void showAll(){
+    public void showAll() {
         int i = 0;
         DoublyLinkedNode<T> current = this.head;
-        while(i!= this.quantity){
+        while (i != this.quantity) {
             System.out.println(current.getContent());
             current = current.getNext();
             i++;
         }
     }
+
+    // public void showAll() {
+    //     DoublyLinkedNode<T> current;
+    //     if (this.isEmpty()) {
+    //         System.out.println("Empty list");
+    //     } else {
+    //         while (true) {
+    //             if (current == this.head) {
+    //                 break;
+    //             }
+    //             current = this.head;
+    //             System.out.println(current.getContent());
+    //             current = current.getNext();
+
+    //         }
+    //     }
+
+    // }
 }
