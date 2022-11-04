@@ -114,7 +114,7 @@ public class CircularDoublyLinkedList<T extends Comparable<T>> {
             return null;
         } else if (this.head.getNext() == this.head) {
             if (content.compareTo(this.head.getContent()) == 0) {
-                return current;
+                return this.head;
             } else {
                 return null;
             }
