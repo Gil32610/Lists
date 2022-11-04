@@ -42,6 +42,7 @@ public class CircularDoublyLinkedList<T extends Comparable<T>> {
             this.quantity++;
         } else {
             this.tail.setNext(aNode);
+            aNode.setPrevious(this.tail);
             this.tail = aNode;
             this.tail.setNext(this.head);
             this.head.setPrevious(this.tail);
