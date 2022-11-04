@@ -107,4 +107,30 @@ public class CircularDoublyLinkedList<T extends Comparable<T>> {
             this.quantity--;
         }
     }
+
+    public DoublyLinkedNode<T> search(T content) {
+        DoublyLinkedNode<T> current = new DoublyLinkedNode<T>(content);
+        if (this.isEmpty()) {
+            return null;
+        } else if (this.head.getNext() == this.head) {
+            if (content.compareTo(this.head.getContent()) == 0) {
+                return current;
+            } else {
+                return null;
+            }
+        } else if (content.compareTo(this.head.getContent()) == 0) {
+            return this.head;
+        } else if (content.compareTo(this.tail.getContent()) == 0) {
+            return this.tail;
+        } else {
+            DoublyLinkedNode<T> aNode = this.head.getNext();
+            while (aNode != this.head) {
+                if (content.compareTo(aNode.getContent()) == 0) {
+                    return aNode;
+                }
+                aNode = aNode.getNext();
+            }
+        }
+        return null;
+    }
 }
