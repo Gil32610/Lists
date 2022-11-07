@@ -8,6 +8,9 @@ public class Pessoa implements Comparable<Pessoa> {
         this.nome = nome;
         this.RG = RG;
     }
+    public Pessoa(String RG){
+        this.RG = RG;
+    }
 
     public String getNome() {
         return nome;
