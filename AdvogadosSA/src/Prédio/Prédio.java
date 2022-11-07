@@ -2,8 +2,6 @@ package Prédio;
 
 import java.util.Scanner;
 
-import javax.swing.plaf.synth.SynthSplitPaneUI;
-
 import Pessoa.Pessoa;
 import Acesso.*;
 

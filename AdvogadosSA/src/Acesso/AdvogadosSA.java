@@ -15,7 +15,7 @@ public class AdvogadosSA {
             this.acesso.insertLast(p);
         } else {
             DoublyLinkedNode<Pessoa> search = this.acesso.search(p);
-            if (search != null) {
+            if (search == null) {
                 this.acesso.insertLast(p);
             } else {
                 System.out.println("Já cadastrado!");
