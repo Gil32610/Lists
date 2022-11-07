@@ -133,4 +133,19 @@ public class CircularDoublyLinkedList<T extends Comparable<T>> {
         }
         return null;
     }
+
+    public void showReverse() {
+        DoublyLinkedNode<T> current;
+
+        if (this.isEmpty()) {
+            System.out.println("Empty List!");
+        } else {
+            current = this.head;
+            for (int i = 0; i < this.quantity; i++) {
+                System.out.println(current.getContent() + " ");
+                current = current.getNext();
+            }
+            System.out.println(" ");
+        }
+    }
 }
