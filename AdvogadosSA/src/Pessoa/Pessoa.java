@@ -1,6 +1,6 @@
 package Pessoa;
 
-public class Pessoa {
+public class Pessoa implements Comparable<Pessoa> {
     private String nome;
     private String RG;
 
@@ -26,9 +26,14 @@ public class Pessoa {
     }
 
     @Override
+    public int compareTo(Pessoa p) {
+        int value = this.getRG().compareTo(p.getRG());
+        return value;
+    }
+
+    @Override
     public String toString() {
         return "Pessoa [nome=" + nome + ", RG=" + RG + "]";
     }
-    
 
 }
