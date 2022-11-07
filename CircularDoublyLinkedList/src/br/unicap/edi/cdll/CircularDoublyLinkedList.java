@@ -153,23 +153,36 @@ public class CircularDoublyLinkedList<T extends Comparable<T>> {
         if (this.isEmpty()) {
             System.out.println("No elements on the list!");
         } else if (this.head.getNext() == this.head) {
-            if (this.head.getContent() == content) {
+            if (content.compareTo(this.head.getContent()) == 0) {
                 this.head = null;
                 this.tail = null;
                 this.quantity = 0;
             } else {
                 System.out.println("Was not added to the list!");
             }
-        } else if (this.head.getContent() == content) {
+        } else if (content.compareTo(this.head.getContent()) == 0) {
             this.head = this.head.getNext();
             this.head.setPrevious(this.tail);
             this.tail.setNext(this.head);
             this.quantity--;
-        } else if (this.tail.getContent() == content) {
+        } else if (content.compareTo(this.tail.getContent()) == 0) {
             this.tail = this.tail.getPrevious();
             this.tail.setNext(this.head);
             this.head.setPrevious(this.tail);
             this.quantity--;
+        } else {
+            DoublyLinkedNode<T> current = search(content);
+            if (current.getContent() != null) {
+                DoublyLinkedNode<T> previous = current.getPrevious();
+                DoublyLinkedNode<T> next = current.getNext();
+                previous.setNext(next);
+                next.setPrevious(previous);
+                System.out.println("removed!");
+            } else {
+                System.out.println("Element not added to the list!");
+
+            }
+
         }
     }
 }
