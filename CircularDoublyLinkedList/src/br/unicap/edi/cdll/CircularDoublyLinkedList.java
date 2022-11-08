@@ -181,6 +181,7 @@ public class CircularDoublyLinkedList<T extends Comparable<T>> {
                 previous.setNext(next);
                 next.setPrevious(previous);
                 System.out.println("removed!");
+                this.quantity--;
             } else {
                 System.out.println("Element not added to the list!");
 
