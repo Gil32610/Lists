@@ -28,7 +28,6 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         return false;
     }
 
-    
     public void showAll() {
         DoublyLinkedNode<T> current;
         if (this.isEmpty()) {
@@ -129,16 +128,18 @@ public class DoublyLinkedList<T extends Comparable<T>> {
             this.quantity++;
             System.out.println("Content added!");
         } else if (content.compareTo(this.first.getContent()) == 0) {
-            node.setNext(this.first);
-            this.first.setPrevious(node);
-            this.first = node;
+            current = this.first;
+            while (current.getNext().getContent().compareTo(content) == 0) {
+                current = current.getNext();
+            }
+            current.setNext(node);
+            node.setNext(current.getNext());
+            node.setPrevious(current);
             this.quantity++;
         } else if (content.compareTo(this.last.getContent()) == 0) {
-            DoublyLinkedNode<T> repeated = this.search(content);
-            node.setNext(repeated);
-            node.setPrevious(repeated.getPrevious());
-            repeated.setPrevious(node);
-            this.quantity++;
+            this.last.setNext(node);
+            node.setPrevious(this.last);
+            this.last = node;
         } else {
             current = this.first.getNext();
             while (current != null) {
