@@ -175,7 +175,7 @@ public class CircularDoublyLinkedList<T extends Comparable<T>> {
             System.out.println("The element remotion was on the tail");
         } else {
             DoublyLinkedNode<T> current = search(content);
-            if (current.getContent() != null) {
+            if (current != null) {
                 DoublyLinkedNode<T> previous = current.getPrevious();
                 DoublyLinkedNode<T> next = current.getNext();
                 previous.setNext(next);
