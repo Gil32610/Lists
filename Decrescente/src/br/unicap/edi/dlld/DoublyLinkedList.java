@@ -213,6 +213,11 @@ public class DoublyLinkedList<T extends Comparable<T>> {
             } else {
                 System.out.println("Was not added");
             }
+        } else if (content.compareTo(this.last.getContent()) > 0) {
+            System.out.println("Was not added!");
+
+        } else if (content.compareTo(this.first.getContent()) < 0) {
+            System.out.println("Was not added");
         } else {
             DoublyLinkedNode<T> current = this.first;
             while (current != null) {
