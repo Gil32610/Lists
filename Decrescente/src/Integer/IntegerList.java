@@ -36,6 +36,7 @@ public class IntegerList {
                 integerLinked.searchContent(number);
                     break;
                 case 0:
+                System.out.println("Concluido!");
                     break;
                 default:
                 System.out.println("Opção inválida!");
