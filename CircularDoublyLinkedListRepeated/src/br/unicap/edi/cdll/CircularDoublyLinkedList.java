@@ -14,6 +14,79 @@ public class CircularDoublyLinkedList<T extends Comparable<T>> {
         }
     }
 
+    public void descendingRepeatedInsetionSort(T content) {
+        DoublyLinkedNode<T> current;
+        DoublyLinkedNode<T> node = new DoublyLinkedNode<>(content);
+        if (this.isEmpty()) {
+            this.head = node;
+            this.tail = node;
+            this.quantity++;
+            this.head.setPrevious(this.tail);
+            this.tail.setNext(this.head);
+            System.out.println("Content added!");
+        } else if (content.compareTo(this.head.getContent()) > 0) {
+            this.head.setPrevious(node);
+            node.setNext(this.head);
+            this.head = node;
+            this.quantity++;
+            this.head.setPrevious(this.tail);
+            this.tail.setNext(this.head);
+            System.out.println("Content added!");
+        } else if (content.compareTo(this.tail.getContent()) < 0) {
+            this.tail.setNext(node);
+            node.setPrevious(this.tail);
+            this.tail = node;
+            this.quantity++;
+            this.head.setPrevious(this.tail);
+            this.tail.setNext(this.head);
+            System.out.println("Content added!");
+        } else if (content.compareTo(this.head.getContent()) == 0) {
+            node.setNext(this.head);
+            this.head.setPrevious(node);
+            node.setPrevious(this.tail);
+            this.tail.setNext(node);
+            this.head = node;
+            this.quantity++;
+        } else if (content.compareTo(this.tail.getContent()) == 0) {
+            current = this.tail;
+            while (current.getPrevious().getContent().compareTo(content) == 0) {
+                current = current.getPrevious();
+                if (current == this.head) {
+                    break;
+                }
+            }
+            node.setNext(current);
+            node.setPrevious(current.getPrevious());
+            current.setPrevious(node);
+            current.getPrevious().setNext(node);
+            this.quantity++;
+        } else {
+            current = this.head.getNext();
+            while (current != this.head) {
+                if (content.compareTo(current.getContent()) > 0) {
+                    node.setNext(current);
+                    node.setPrevious(current.getPrevious());
+                    current.getPrevious().setNext(node);
+                    current.setPrevious(node);
+                    this.quantity++;
+                    System.out.println("Content added!");
+                    break;
+                }
+                if (content.compareTo(current.getContent()) == 0) {
+                    node.setNext(current);
+                    node.setPrevious(current.getPrevious());
+                    current.setPrevious(node);
+                    current.getPrevious().setNext(node);
+                    this.quantity++;
+                    break;
+                } else {
+                    current = current.getNext();
+                }
+            }
+        }
+
+    }
+
     public void descendingInsetionSort(T content) {
         DoublyLinkedNode<T> current;
         DoublyLinkedNode<T> node = new DoublyLinkedNode<>(content);
