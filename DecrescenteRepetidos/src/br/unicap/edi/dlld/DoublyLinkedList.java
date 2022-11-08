@@ -1,4 +1,4 @@
-package br.unicap.edi.dll;
+package br.unicap.edi.dlld;
 
 public class DoublyLinkedList<T extends Comparable<T>> {
     private DoublyLinkedNode<T> first;
@@ -28,34 +28,7 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         return false;
     }
 
-    public void insertFirst(T content) {
-        DoublyLinkedNode<T> node = new DoublyLinkedNode(content);
-        if (this.isEmpty()) {
-            this.first = node;
-            this.last = node;
-            this.quantity++;
-        } else {
-            node.setNext(this.first);
-            this.first.setPrevious(node);
-            this.first = node;
-            this.quantity++;
-        }
-    }
-
-    public void insertLast(T content) {
-        DoublyLinkedNode<T> node = new DoublyLinkedNode(content);
-        if (this.isEmpty()) {
-            this.first = node;
-            this.last = node;
-            this.quantity++;
-        } else {
-            this.last.setNext(node);
-            node.setPrevious(this.last);
-            this.last = node;
-            this.quantity++;
-        }
-    }
-
+    
     public void showAll() {
         DoublyLinkedNode<T> current;
         if (this.isEmpty()) {
@@ -135,7 +108,7 @@ public class DoublyLinkedList<T extends Comparable<T>> {
 
     }
 
-    public void insertionSort(T content) {
+    public void insertionDescendingSort(T content) {
         DoublyLinkedNode<T> current;
         DoublyLinkedNode<T> node = new DoublyLinkedNode<>(content);
         if (this.isEmpty()) {
@@ -143,36 +116,39 @@ public class DoublyLinkedList<T extends Comparable<T>> {
             this.last = node;
             this.quantity++;
             System.out.println("Content added!");
-        } else if (content.compareTo(this.first.getContent()) < 0) {
+        } else if (content.compareTo(this.first.getContent()) > 0) {
             this.first.setPrevious(node);
             node.setNext(this.first);
             this.first = node;
             this.quantity++;
             System.out.println("Content added!");
-        } else if (content.compareTo(this.last.getContent()) > 0) {
+        } else if (content.compareTo(this.last.getContent()) < 0) {
             this.last.setNext(node);
             node.setPrevious(this.last);
             this.last = node;
             this.quantity++;
             System.out.println("Content added!");
         } else if (content.compareTo(this.first.getContent()) == 0) {
-            System.out.println("Already exists");
+            node.setNext(this.first);
+            this.first.setPrevious(node);
+            this.first = node;
+            this.quantity++;
         } else if (content.compareTo(this.last.getContent()) == 0) {
-            System.out.println("Already exists");
+            DoublyLinkedNode<T> repeated = this.search(content);
+            node.setNext(repeated);
+            node.setPrevious(repeated.getPrevious());
+            repeated.setPrevious(node);
+            this.quantity++;
         } else {
             current = this.first.getNext();
             while (current != null) {
-                if (content.compareTo(current.getContent()) < 0) {
+                if (content.compareTo(current.getContent()) >= 0) {
                     node.setNext(current);
                     node.setPrevious(current.getPrevious());
                     current.getPrevious().setNext(node);
                     current.setPrevious(node);
                     this.quantity++;
                     System.out.println("Content added!");
-                    break;
-                }
-                if (content.compareTo(current.getContent()) == 0) {
-                    System.out.println("Already exists");
                     break;
                 } else {
                     current = current.getNext();
@@ -181,7 +157,7 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         }
     }
 
-    public DoublyLinkedNode<T> search(T content) {
+    private DoublyLinkedNode<T> search(T content) {
         if (this.isEmpty()) {
             return null;
         } else if (content.compareTo(this.last.getContent()) > 0) {
@@ -194,7 +170,7 @@ public class DoublyLinkedList<T extends Comparable<T>> {
                 if (content.compareTo(current.getContent()) == 0) {
                     return current;
                 }
-                if (content.compareTo(current.getContent()) < 0) {
+                if (content.compareTo(current.getContent()) > 0) {
                     return null;
                 }
                 current = current.getNext();
@@ -203,6 +179,38 @@ public class DoublyLinkedList<T extends Comparable<T>> {
         }
 
     }
-    
+
+    public void searchContent(T content) {
+        if (this.isEmpty()) {
+            System.out.println("Empty list");
+        } else if (this.first.getNext() == null) {
+            if (content.compareTo(this.first.getContent()) == 0) {
+                System.out.println("Content: " + this.first.getContent());
+            } else {
+                System.out.println("Was not added");
+            }
+        } else if (content.compareTo(this.last.getContent()) > 0) {
+            System.out.println("Was not added!");
+
+        } else if (content.compareTo(this.first.getContent()) < 0) {
+            System.out.println("Was not added");
+        } else {
+            DoublyLinkedNode<T> current = this.first;
+            while (current != null) {
+                if (content.compareTo(current.getContent()) == 0) {
+                    System.out.println("Content: " + current.getContent());
+                    break;
+
+                } else if (content.compareTo(current.getContent()) > 0) {
+                    System.out.println("Was not added to the list");
+                    break;
+                } else {
+                    current = current.getNext();
+                }
+
+            }
+        }
+
+    }
 
 }
