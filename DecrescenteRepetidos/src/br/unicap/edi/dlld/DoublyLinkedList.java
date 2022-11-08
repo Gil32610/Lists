@@ -140,10 +140,11 @@ public class DoublyLinkedList<T extends Comparable<T>> {
             this.last.setNext(node);
             node.setPrevious(this.last);
             this.last = node;
+            this.quantity++;
         } else {
             current = this.first.getNext();
             while (current != null) {
-                if (content.compareTo(current.getContent()) >= 0) {
+                if (content.compareTo(current.getContent()) > 0) {
                     node.setNext(current);
                     node.setPrevious(current.getPrevious());
                     current.getPrevious().setNext(node);
@@ -151,6 +152,9 @@ public class DoublyLinkedList<T extends Comparable<T>> {
                     this.quantity++;
                     System.out.println("Content added!");
                     break;
+                } else if (content.compareTo(current.getContent()) == 0) {
+                    continue;
+
                 } else {
                     current = current.getNext();
                 }
