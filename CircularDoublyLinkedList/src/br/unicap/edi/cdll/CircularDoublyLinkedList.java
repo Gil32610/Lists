@@ -210,7 +210,20 @@ public class CircularDoublyLinkedList<T extends Comparable<T>> {
         }
     }
 
-    public CircularDoublyLinkedList<T> dividir(){
-        
+    public CircularDoublyLinkedList<T> dividir() {
+        CircularDoublyLinkedList<T> aList;
+        if (this.isEmpty()) {
+            return this;
+        }
+        aList = new CircularDoublyLinkedList<>();
+        int split = this.quantity / 2;
+        DoublyLinkedNode<T> current = this.tail;
+        for (int i = 0; i < split; i++) {
+            aList.insertFirst(current.getContent());
+            current = current.getPrevious();
+            this.removeLast();
+        }
+        return aList;
     }
+
 }
