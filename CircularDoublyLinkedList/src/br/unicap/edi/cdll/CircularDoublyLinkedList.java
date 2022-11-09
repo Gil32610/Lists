@@ -188,4 +188,28 @@ public class CircularDoublyLinkedList<T extends Comparable<T>> {
 
         }
     }
+
+    public void concatenar(CircularDoublyLinkedList<T> lista2) {
+        if (lista2.isEmpty()) {
+            System.out.println("Lista 2 está vazia");
+        } else {
+            if (lista2.head.getNext() == lista2.head) {
+                this.insertLast(lista2.head.getContent());
+                lista2.removeFirst();
+
+            } else {
+                DoublyLinkedNode<T> current = lista2.head;
+                while (!lista2.isEmpty()) {
+                    this.insertLast(current.getContent());
+                    current = current.getNext();
+                    lista2.removeFirst();
+                }
+
+            }
+        }
+    }
+
+    public CircularDoublyLinkedList<T> dividir(){
+        
+    }
 }
