@@ -14,40 +14,130 @@ public class CircularDoublyLinkedList<T extends Comparable<T>> {
         }
     }
 
-    public void insertFirst(T content) {
-        DoublyLinkedNode<T> aNode = new DoublyLinkedNode<T>(content);
+    public void descendingRepeatedInsetionSort(T content) {
+        DoublyLinkedNode<T> current;
+        DoublyLinkedNode<T> node = new DoublyLinkedNode<>(content);
         if (this.isEmpty()) {
-            this.head = aNode;
-            this.tail = aNode;
-            this.tail.setNext(this.head);
+            this.head = node;
+            this.tail = node;
+            this.quantity++;
             this.head.setPrevious(this.tail);
+            this.tail.setNext(this.head);
+            System.out.println("Content added!");
+        } else if (content.compareTo(this.head.getContent()) > 0) {
+            this.head.setPrevious(node);
+            node.setNext(this.head);
+            this.head = node;
+            this.quantity++;
+            this.head.setPrevious(this.tail);
+            this.tail.setNext(this.head);
+            System.out.println("Content added!");
+        } else if (content.compareTo(this.tail.getContent()) < 0) {
+            this.tail.setNext(node);
+            node.setPrevious(this.tail);
+            this.tail = node;
+            this.quantity++;
+            this.head.setPrevious(this.tail);
+            this.tail.setNext(this.head);
+            System.out.println("Content added!");
+        } else if (content.compareTo(this.head.getContent()) == 0) {
+            node.setNext(this.head);
+            this.head.setPrevious(node);
+            node.setPrevious(this.tail);
+            this.tail.setNext(node);
+            this.head = node;
+            this.quantity++;
+        } else if (content.compareTo(this.tail.getContent()) == 0) {
+            current = this.tail;
+            while (current.getPrevious().getContent().compareTo(content) == 0) {
+                current = current.getPrevious();
+                if (current == this.head) {
+                    break;
+                }
+            }
+            node.setNext(current);
+            node.setPrevious(current.getPrevious());
+            current.setPrevious(node);
+            current.getPrevious().setNext(node);
             this.quantity++;
         } else {
-            aNode.setNext(this.head);
-            this.head.setPrevious(aNode);
-            this.head = aNode;
-            this.tail.setNext(this.head);
-            this.head.setPrevious(this.tail);
-            this.quantity++;
+            current = this.head.getNext();
+            while (current != this.head) {
+                if (content.compareTo(current.getContent()) > 0) {
+                    node.setNext(current);
+                    node.setPrevious(current.getPrevious());
+                    current.getPrevious().setNext(node);
+                    current.setPrevious(node);
+                    this.quantity++;
+                    System.out.println("Content added!");
+                    break;
+                }
+                if (content.compareTo(current.getContent()) == 0) {
+                    node.setNext(current);
+                    node.setPrevious(current.getPrevious());
+                    current.setPrevious(node);
+                    current.getPrevious().setNext(node);
+                    this.quantity++;
+                    break;
+                } else {
+                    current = current.getNext();
+                }
+            }
         }
+
     }
 
-    public void insertLast(T content) {
-        DoublyLinkedNode<T> aNode = new DoublyLinkedNode<T>(content);
+    public void descendingInsetionSort(T content) {
+        DoublyLinkedNode<T> current;
+        DoublyLinkedNode<T> node = new DoublyLinkedNode<>(content);
         if (this.isEmpty()) {
-            this.head = aNode;
-            this.tail = aNode;
-            this.tail.setNext(this.head);
-            this.head.setPrevious(this.tail);
+            this.head = node;
+            this.tail = node;
             this.quantity++;
+            this.head.setPrevious(this.tail);
+            this.tail.setNext(this.head);
+            System.out.println("Content added!");
+        } else if (content.compareTo(this.head.getContent()) > 0) {
+            this.head.setPrevious(node);
+            node.setNext(this.head);
+            this.head = node;
+            this.quantity++;
+            this.head.setPrevious(this.tail);
+            this.tail.setNext(this.head);
+            System.out.println("Content added!");
+        } else if (content.compareTo(this.tail.getContent()) < 0) {
+            this.tail.setNext(node);
+            node.setPrevious(this.tail);
+            this.tail = node;
+            this.quantity++;
+            this.head.setPrevious(this.tail);
+            this.tail.setNext(this.head);
+            System.out.println("Content added!");
+        } else if (content.compareTo(this.head.getContent()) == 0) {
+            System.out.println("Already exists");
+        } else if (content.compareTo(this.tail.getContent()) == 0) {
+            System.out.println("Already exists");
         } else {
-            this.tail.setNext(aNode);
-            aNode.setPrevious(this.tail);
-            this.tail = aNode;
-            this.tail.setNext(this.head);
-            this.head.setPrevious(this.tail);
-            this.quantity++;
+            current = this.head.getNext();
+            while (current != this.head) {
+                if (content.compareTo(current.getContent()) > 0) {
+                    node.setNext(current);
+                    node.setPrevious(current.getPrevious());
+                    current.getPrevious().setNext(node);
+                    current.setPrevious(node);
+                    this.quantity++;
+                    System.out.println("Content added!");
+                    break;
+                }
+                if (content.compareTo(current.getContent()) == 0) {
+                    System.out.println("Already exists");
+                    break;
+                } else {
+                    current = current.getNext();
+                }
+            }
         }
+
     }
 
     public void showAll() {
@@ -188,29 +278,5 @@ public class CircularDoublyLinkedList<T extends Comparable<T>> {
             }
 
         }
-    }
-
-    public void concatenar(CircularDoublyLinkedList<T> lista2) {
-        if (lista2.isEmpty()) {
-            System.out.println("Lista 2 está vazia");
-        } else {
-            if (lista2.head.getNext() == lista2.head) {
-                this.insertLast(lista2.head.getContent());
-                lista2.removeFirst();
-
-            } else {
-                DoublyLinkedNode<T> current = lista2.head;
-                while (!lista2.isEmpty()) {
-                    this.insertLast(current.getContent());
-                    current = current.getNext();
-                    lista2.removeFirst();
-                }
-
-            }
-        }
-    }
-
-    public CircularDoublyLinkedList<T> dividir(){
-        
     }
 }
