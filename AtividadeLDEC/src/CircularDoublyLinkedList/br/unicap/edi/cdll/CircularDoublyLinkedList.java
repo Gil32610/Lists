@@ -1,4 +1,4 @@
-package br.unicap.edi.cdll;
+package CircularDoublyLinkedList.br.unicap.edi.cdll;
 
 public class CircularDoublyLinkedList<T extends Comparable<T>> {
     private DoublyLinkedNode<T> head;
