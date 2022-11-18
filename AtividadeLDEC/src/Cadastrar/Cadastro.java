@@ -16,8 +16,7 @@ public class Cadastro {
         System.out.println("Informe a matrícula:");
         matricula = s.nextLine();
         a = new Aluno(nome, matricula);
-        t.getTurma().insertLast(a);
-        System.out.println("Aluno adicionado a turma!");
+        t.getTurma().ascendingInsetionSort(a);
     }
 
     public static void listar(Turma t) {

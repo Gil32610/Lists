@@ -230,4 +230,56 @@ public class CircularDoublyLinkedList<T extends Comparable<T>> {
         return aList;
     }
 
+    public void ascendingInsetionSort(T content) {
+        DoublyLinkedNode<T> current;
+        DoublyLinkedNode<T> node = new DoublyLinkedNode<>(content);
+        if (this.isEmpty()) {
+            this.head = node;
+            this.tail = node;
+            this.quantity++;
+            this.head.setPrevious(this.tail);
+            this.tail.setNext(this.head);
+            System.out.println("Content added!");
+        } else if (content.compareTo(this.head.getContent()) < 0) {
+            this.head.setPrevious(node);
+            node.setNext(this.head);
+            this.head = node;
+            this.quantity++;
+            this.head.setPrevious(this.tail);
+            this.tail.setNext(this.head);
+            System.out.println("Content added!");
+        } else if (content.compareTo(this.tail.getContent()) > 0) {
+            this.tail.setNext(node);
+            node.setPrevious(this.tail);
+            this.tail = node;
+            this.quantity++;
+            this.head.setPrevious(this.tail);
+            this.tail.setNext(this.head);
+            System.out.println("Content added!");
+        } else if (content.compareTo(this.head.getContent()) == 0) {
+            System.out.println("Already exists");
+        } else if (content.compareTo(this.tail.getContent()) == 0) {
+            System.out.println("Already exists");
+        } else {
+            current = this.head.getNext();
+            while (current != this.head) {
+                if (content.compareTo(current.getContent()) > 0) {
+                    node.setNext(current);
+                    node.setPrevious(current.getPrevious());
+                    current.getPrevious().setNext(node);
+                    current.setPrevious(node);
+                    this.quantity++;
+                    System.out.println("Content added!");
+                    break;
+                }
+                if (content.compareTo(current.getContent()) == 0) {
+                    System.out.println("Already exists");
+                    break;
+                } else {
+                    current = current.getNext();
+                }
+            }
+        }
+    }
+
 }
