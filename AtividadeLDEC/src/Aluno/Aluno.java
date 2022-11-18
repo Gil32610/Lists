@@ -10,11 +10,9 @@ public class Aluno implements Comparable<Aluno> {
         this.matricula = matricula;
     }
 
-    public Aluno(String nome, String matricula, double media, int faltas) {
+    public Aluno(String nome, String matricula) {
         this.nome = nome;
         this.matricula = matricula;
-        this.media = media;
-        this.faltas = faltas;
     }
 
     public String getNome() {
@@ -46,7 +44,7 @@ public class Aluno implements Comparable<Aluno> {
     }
 
     public void setFaltas(int faltas) {
-        this.faltas = faltas;
+        this.faltas += faltas;
     }
 
     @Override
