@@ -36,6 +36,9 @@ public class Main {
                     t = t4;
                     operateClass(t);
                     break;
+                case 0:
+                System.out.println("Até mais!");
+                    break;
                 default:
                     break;
             }
