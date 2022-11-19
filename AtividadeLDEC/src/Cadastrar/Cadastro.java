@@ -23,7 +23,7 @@ public class Cadastro {
         t.getTurma().showAll();
     }
 
-    private static Aluno consultar(Turma t) {
+    public static Aluno consultar(Turma t) {
         Scanner s = new Scanner(System.in);
         String matricula;
         Aluno a;
